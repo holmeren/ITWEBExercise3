@@ -1,0 +1,18 @@
+<h1>Log workout activity</h1>
+<div class="container">
+    <form [formGroup]="workoutForm">
+      <h3 for="title">Date</h3>
+      <input class="form-control" type="datetime-local" formControlName="date"/>
+      <div class="mt-5"></div>
+      <app-exercise-list
+        [workoutForm]="workoutLogForm" 
+        [exercises]="workoutLog.exercises">        
+      </app-exercise-list>
+      <button class="btn btn-primary" type="submit" [disabled]="!workoutLogForm.valid" (click)="onSubmit()">
+        Save workout log
+      </button>
+      <button class="btn btn-primary" [routerLink]="['']">
+        Go to workout list
+      </button>
+    </form>
+</div>

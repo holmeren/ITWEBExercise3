@@ -12,11 +12,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ExerciseListComponent } from './edit-workout/exercise-list/exercise-list.component';
 import { ExerciseFormComponent } from './edit-workout/exercise-form/exercise-form.component';
 import { DbService } from 'app/services/db.service';
+import { LogWorkoutComponent } from './log-workout/log-workout.component';
 
 const appRoutes: Routes = [
   {path: '', component: WorkoutListComponent},
   {path: 'edit/:id', component: EditWorkoutComponent},
-  {path: 'edit', component: EditWorkoutComponent}
+  {path: 'edit', component: EditWorkoutComponent},
+  {path: 'log-workout', component: LogWorkoutComponent}
 ]
 
 @NgModule({
@@ -27,6 +29,7 @@ const appRoutes: Routes = [
     EditWorkoutComponent,
     ExerciseListComponent,
     ExerciseFormComponent,
+    LogWorkoutComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
