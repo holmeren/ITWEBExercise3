@@ -1,0 +1,13 @@
+<div [formGroup]="workoutForm">
+  <div formArrayName="exercises">
+    <div *ngFor="let exercise of exercises; let i = index">
+      <h4>Exercise {{i + 1}}</h4>
+      <app-exercise-form
+        [exercises]="workoutForm.controls.exercises"
+        [exercise]="exercise">        
+      </app-exercise-form>
+      <br>
+    </div>
+  </div>
+</div>
+<button class="btn btn-primary"(click)="addExercise()">Add exercise</button>

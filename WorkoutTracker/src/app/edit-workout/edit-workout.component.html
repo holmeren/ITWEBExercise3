@@ -1,3 +1,17 @@
-<p>
-  edit-workout works!
-</p>
+<div class="container">
+    <form [formGroup]="workoutForm">
+      <h3 for="title">Title</h3>
+      <input class="form-control" formControlName="title"/>
+      <div class="mt-5"></div>
+      <app-exercise-list
+        [workoutForm]="workoutForm" 
+        [exercises]="workout.exercises">        
+      </app-exercise-list>
+      <button class="btn btn-primary" type="submit" [disabled]="!workoutForm.valid" (click)="onSubmit()">
+        Save workout
+      </button>
+      <button class="btn btn-primary" [routerLink]="['']">
+        Go to workout list
+      </button>
+    </form>
+</div>
