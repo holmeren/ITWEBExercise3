@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Exercise } from 'models/exercise';
 import { FormArray, FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Workout } from 'models/workout';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
+import { DbService } from 'app/services/db.service';
 
 @Component({
   selector: 'app-edit-workout',
@@ -13,15 +16,24 @@ export class EditWorkoutComponent implements OnInit {
   public workout: Workout;
   public workoutForm: FormGroup;
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: FormBuilder, private route: ActivatedRoute, private dbService: DbService) { }
 
   ngOnInit() {
-    this.workout = this.getWorkoutData();
+    this.workout = {title: "", exercises: []}
     this.workoutForm = this.toFormGroup(this.workout)
+    
+    this.route.params.subscribe(value => {
+      // If value is null we need to create a new workout, not edit an existing one
+      if(value.id != null) {
+        // actually fetch the data from dbService.getWorkout instead
+        this.workout = this.getWorkoutData(value.id);        
+        this.workoutForm = this.toFormGroup(this.workout)
+      }
+    })   
   }
 
-  private getWorkoutData() : Workout {
-    // Returns mock data
+  // Returns mock data, remove this at some point
+  private getWorkoutData(id: number) : Workout {
     let exercise1: Exercise = {
       name: "Squat",
       description: "Lift the damn weight",

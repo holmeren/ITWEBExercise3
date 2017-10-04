@@ -11,9 +11,11 @@ import { EditWorkoutComponent } from './edit-workout/edit-workout.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ExerciseListComponent } from './edit-workout/exercise-list/exercise-list.component';
 import { ExerciseFormComponent } from './edit-workout/exercise-form/exercise-form.component';
+import { DbService } from 'app/services/db.service';
 
 const appRoutes: Routes = [
   {path: '', component: WorkoutListComponent},
+  {path: 'edit/:id', component: EditWorkoutComponent},
   {path: 'edit', component: EditWorkoutComponent}
 ]
 
@@ -33,7 +35,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [DbService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
