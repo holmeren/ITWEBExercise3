@@ -9,13 +9,14 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class LogWorkoutComponent implements OnInit {
   public workoutLog: WorkoutLog
-  public workoutLogform: FormGroup;
+  public workoutLogForm: FormGroup;
 
   constructor(private _fb: FormBuilder) { }
 
   ngOnInit() {
     this.workoutLog = {date: new Date().toLocaleString(), exercises: []}
-    this.workoutLogform = this.toFormGroup(this.workoutLog)
+    this.workoutLogForm = this.toFormGroup(this.workoutLog)
+    console.log(this.workoutLogForm)
   }
 
   private toFormGroup(workoutLog: WorkoutLog) : FormGroup {
@@ -26,13 +27,13 @@ export class LogWorkoutComponent implements OnInit {
   }
 
   public onSubmit() {
-    if(!this.workoutLogform.valid) {
+    if(!this.workoutLogForm.valid) {
       console.error("Form invalid")
       return false
     }
 
     // submit workout log to db
-    console.log(this.workoutLogform.value)
+    console.log(this.workoutLogForm.value)
   }
 
 }
