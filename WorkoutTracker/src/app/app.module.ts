@@ -13,6 +13,8 @@ import { ExerciseListComponent } from './edit-workout/exercise-list/exercise-lis
 import { ExerciseFormComponent } from './edit-workout/exercise-form/exercise-form.component';
 import { DbService } from 'app/services/db.service';
 import { LogWorkoutComponent } from './log-workout/log-workout.component';
+import { HttpClient } from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 
 const appRoutes: Routes = [
   {path: '', component: WorkoutListComponent},
@@ -36,9 +38,10 @@ const appRoutes: Routes = [
     BrowserModule,
     NgbModule.forRoot(),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [DbService],
+  providers: [DbService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

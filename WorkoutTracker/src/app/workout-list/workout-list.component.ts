@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Workout } from "models/workout"
 import { Exercise } from 'models/exercise';
+import { DbService } from "app/services/db.service";
+
 
 @Component({
   selector: 'app-workout-list',
@@ -11,7 +13,7 @@ import { Exercise } from 'models/exercise';
 export class WorkoutListComponent implements OnInit {
   private workouts: Workout[] = [];
 
-  constructor() {
+  constructor(private dbService: DbService) {
     // Fetch data from server
 
     // Mock data
@@ -31,6 +33,7 @@ export class WorkoutListComponent implements OnInit {
     let anotherQuickWorkout: Workout = {exercises: [], title: "Another quick workout"};
     quickWorkout.exercises = [exercise1, exercise2];
     anotherQuickWorkout.exercises = [exercise1, exercise2]
+    var workouts = this.dbService.getAllWorkouts();
     this.workouts.push(quickWorkout, anotherQuickWorkout);
   }
 
