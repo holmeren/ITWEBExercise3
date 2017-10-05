@@ -41,9 +41,10 @@ const appRoutes: Routes = [
     BrowserModule,
     NgbModule.forRoot(),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [DbService],
+  providers: [DbService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
