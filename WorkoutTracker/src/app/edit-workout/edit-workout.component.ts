@@ -26,8 +26,10 @@ export class EditWorkoutComponent implements OnInit {
       // If value is null we need to create a new workout, not edit an existing one
       if(value.id != null) {
         // actually fetch the data from dbService.getWorkout instead
-        this.workout = this.getWorkoutData(value.id);        
+        this.workout = this.getWorkoutData(value.id);    
+        //this.workout = this.getWorkout(value.id)    
         this.workoutForm = this.toFormGroup(this.workout)
+        
       }
     })   
   }
