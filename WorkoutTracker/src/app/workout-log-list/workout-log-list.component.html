@@ -1,0 +1,31 @@
+<h1>Workout logs</h1>
+<button type="button" class="btn btn-primary" [routerLink]="['/log-workout']">Log workout activity</button>
+<h3 *ngIf="!workoutLogs">You currently have no workout activity logged</h3>
+<div *ngIf="workoutLogs" class="container">
+  <div *ngFor="let workoutLog of workoutLogs; let i = index">
+    <div class="card">
+          <h4>{{workoutLog.date}}</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Exercise</th>
+                <th>Description</th>
+                <th>Sets</th>
+                <th>Reps/time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let exercise of workoutLog.exercises; let j = index">
+                <td>{{workoutLog.exercises[j].name}}</td>
+                <td>{{workoutLog.exercises[j].description}}</td>
+                <td>{{workoutLog.exercises[j].sets}}</td>
+                <td>{{workoutLog.exercises[j].reps}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  </div>
+
+
+
+</div>

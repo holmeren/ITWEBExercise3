@@ -13,12 +13,15 @@ import { ExerciseListComponent } from './edit-workout/exercise-list/exercise-lis
 import { ExerciseFormComponent } from './edit-workout/exercise-form/exercise-form.component';
 import { DbService } from 'app/services/db.service';
 import { LogWorkoutComponent } from './log-workout/log-workout.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { WorkoutLogListComponent } from './workout-log-list/workout-log-list.component';
 
 const appRoutes: Routes = [
   {path: '', component: WorkoutListComponent},
   {path: 'edit/:id', component: EditWorkoutComponent},
   {path: 'edit', component: EditWorkoutComponent},
-  {path: 'log-workout', component: LogWorkoutComponent}
+  {path: 'log-workout', component: LogWorkoutComponent},
+  {path: 'workout-logs', component: WorkoutLogListComponent}
 ]
 
 @NgModule({
@@ -30,6 +33,8 @@ const appRoutes: Routes = [
     ExerciseListComponent,
     ExerciseFormComponent,
     LogWorkoutComponent,
+    NavbarComponent,
+    WorkoutLogListComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
