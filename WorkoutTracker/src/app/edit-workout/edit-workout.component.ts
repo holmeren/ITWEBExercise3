@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Exercise } from 'models/exercise';
 import { FormArray, FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Workout } from 'models/workout';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { DbService } from 'app/services/db.service';
 
@@ -16,10 +16,10 @@ export class EditWorkoutComponent implements OnInit {
   public workout: Workout;
   public workoutForm: FormGroup;
 
-  constructor(private _fb: FormBuilder, private route: ActivatedRoute, private dbService: DbService) { }
+  constructor(private _fb: FormBuilder, private route: ActivatedRoute, private dbService: DbService, private router: Router) { }
 
   ngOnInit() {
-    this.workout = {title: "", exercises: []}
+    this.workout = {name: "", exercises: []}
     this.workoutForm = this.toFormGroup(this.workout)
     
     this.route.params.subscribe(value => {
@@ -48,14 +48,14 @@ export class EditWorkoutComponent implements OnInit {
       reps: "5",
       sets: 5,
     }
-    let quickWorkout: Workout = {exercises: [], title: "Quick workout"};
+    let quickWorkout: Workout = {exercises: [], name: "Quick workout"};
     quickWorkout.exercises = [exercise1, exercise2];
     return quickWorkout;
   }
 
   private toFormGroup(workout: Workout) : FormGroup {
     const formGroup = this._fb.group({
-      title: [ workout.title, Validators.required ],
+      name: [ workout.name, Validators.required ],
     })
     return formGroup;
   }
@@ -66,8 +66,8 @@ export class EditWorkoutComponent implements OnInit {
       return false;
     }
 
-    //submit this to DB instead of console logging
-    console.log(this.workoutForm.value.exercises)  
+    this.dbService.createWorkout(this.workoutForm.value)
+    this.router.navigateByUrl("")
   } 
 
 }

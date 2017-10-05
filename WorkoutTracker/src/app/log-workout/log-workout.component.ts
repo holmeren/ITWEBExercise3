@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkoutLog } from 'models/workoutLog';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { DbService } from 'app/services/db.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-workout',
@@ -11,7 +13,7 @@ export class LogWorkoutComponent implements OnInit {
   public workoutLog: WorkoutLog
   public workoutLogForm: FormGroup;
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: FormBuilder, private dbService: DbService, private router: Router) { }
 
   ngOnInit() {
     this.workoutLog = {date: new Date().toLocaleString(), exercises: []}
@@ -31,9 +33,8 @@ export class LogWorkoutComponent implements OnInit {
       console.error("Form invalid")
       return false
     }
-
-    // submit workout log to db
-    console.log(this.workoutLogForm.value)
+    this.dbService.createWorkoutLog(this.workoutLogForm.value)
+    this.router.navigateByUrl("workout-logs")
   }
 
 }

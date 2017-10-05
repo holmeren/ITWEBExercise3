@@ -15,6 +15,8 @@ import { DbService } from 'app/services/db.service';
 import { LogWorkoutComponent } from './log-workout/log-workout.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { WorkoutLogListComponent } from './workout-log-list/workout-log-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 const appRoutes: Routes = [
   {path: '', component: WorkoutListComponent},

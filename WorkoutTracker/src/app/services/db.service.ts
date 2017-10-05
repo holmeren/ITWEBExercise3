@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { Workout } from 'models/workout'
 import { HttpClient } from '@angular/common/http';
-import {HttpClientModule} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import { HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { WorkoutLog } from 'models/workoutLog';
 
 @Injectable()
 export class DbService {
@@ -12,20 +13,30 @@ export class DbService {
 
   constructor(private http: HttpClient) { }
 
-  // getWorkout(id: number): Promise<Workout> {
-
-  // }
-
-  public async getAllWorkouts(){
-    
-    var workouts = await this.http.get(this.baseUrl);
-    workouts.subscribe(workouts => {
-      return workouts;
-    });
+  public getAllWorkouts(): Observable<any> {
+    return this.http.get(this.baseUrl + 'workouts')
   }
 
-  public async getWorkoutById(id: string){
+  public getWorkout(id: string): Observable<any> {
+    return this.http.get(this.baseUrl + 'workout/' + id)
+  }
 
+  public getAllWorkoutLogs(): Observable<any> {
+    return this.http.get(this.baseUrl + 'workoutLogs')
+  }
+
+  public getWorkoutLog(id: string): Observable<any> {
+    return this.http.get(this.baseUrl + 'workoutLog/' + id)
+  }
+
+  public createWorkout(workout: Workout) {
+    const req = this.http.post(this.baseUrl + 'createWorkout', workout)
+    req.subscribe()
+  }
+
+  public createWorkoutLog(workoutLog: WorkoutLog) {
+    const req = this.http.post(this.baseUrl + 'createWorkoutLog', workoutLog)
+    req.subscribe()
   }
 
 }

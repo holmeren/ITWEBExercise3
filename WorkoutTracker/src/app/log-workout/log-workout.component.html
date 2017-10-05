@@ -1,8 +1,8 @@
 <h1 class="mx-auto" style="width: auto">Log workout activity</h1>
 <div class="container">
     <form [formGroup]="workoutLogForm">
-      <h3 for="title">Date</h3>
-      <input class="form-control" type="datetime-local" formControlName="date"/>
+      <h3 for="date">Date</h3>
+      <input class="form-control" type="date" formControlName="date"/>
       <div class="mt-5"></div>
       <app-exercise-list
         [workoutForm]="workoutLogForm" 

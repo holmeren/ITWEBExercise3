@@ -1,11 +1,11 @@
 <h1>All workout programs</h1>
 <button type="button" class="btn btn-primary" [routerLink]="['edit']">Create new workout</button>
-<h3 *ngIf="!workouts">You currently have no workout programs</h3>
+<h3 *ngIf="workouts.length < 1">You currently have no workout programs</h3>
 
 <div class="container">
   <div *ngFor="let workout of workouts; let i = index">
     <div class="card">
-          <h4>{{workout.title}}</h4>
+          <h4>{{workout.name}}</h4>
           <table class="table">
             <thead>
               <tr>
@@ -22,9 +22,9 @@
                 <td>{{workout.exercises[j].sets}}</td>
                 <td>{{workout.exercises[j].reps}}</td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <button class="btn btn-primary" [routerLink]="['edit', i]">Edit</button>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
     </div>

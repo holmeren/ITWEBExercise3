@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkoutLog } from 'models/workoutLog';
+import { DbService } from 'app/services/db.service';
 
 @Component({
   selector: 'app-workout-log-list',
@@ -9,7 +10,11 @@ import { WorkoutLog } from 'models/workoutLog';
 export class WorkoutLogListComponent implements OnInit {
   public workoutLogs: WorkoutLog[];
 
-  constructor() { }
+  constructor(private dbService: DbService) {
+    dbService.getAllWorkoutLogs().subscribe(data => {
+      this.workoutLogs = data.workoutLogs
+    })
+  }
 
   ngOnInit() {
   }
