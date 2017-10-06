@@ -9,7 +9,7 @@ import { WorkoutLog } from 'models/workoutLog';
 @Injectable()
 export class DbService {
 
-  private baseUrl = "https://polar-badlands-78608.herokuapp.com/api/"
+  public baseUrl = "https://polar-badlands-78608.herokuapp.com/api/"
 
   constructor(private http: HttpClient) { }
 

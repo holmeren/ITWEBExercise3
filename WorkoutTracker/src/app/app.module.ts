@@ -16,6 +16,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { WorkoutLogListComponent } from './workout-log-list/workout-log-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
+import { AuthInterceptorService } from 'app/services/auth-interceptor.service';
 
 const appRoutes: Routes = [
   {path: '', component: WorkoutListComponent},
@@ -44,7 +45,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [DbService, HttpClient],
+  providers: [DbService, HttpClient, AuthInterceptorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
