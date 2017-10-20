@@ -26,16 +26,16 @@ export class DbService {
   }
 
   public getWorkoutLog(id: string): Observable<any> {
-    return this.http.get(this.baseUrl + 'workoutLog/' + id)
+    return this.http.get(this.baseUrl + '/workoutLog/' + id)
   }
 
   public createWorkout(workout: Workout) {
-    const req = this.http.post(this.baseUrl + 'createWorkout', workout)
+    const req = this.http.post(this.baseUrl + '/createWorkout', workout)
     req.subscribe()
   }
 
   public createWorkoutLog(workoutLog: WorkoutLog) {
-    const req = this.http.post(this.baseUrl + 'createWorkoutLog', workoutLog)
+    const req = this.http.post(this.baseUrl + '/createWorkoutLog', workoutLog)
     req.subscribe()
   }
 
