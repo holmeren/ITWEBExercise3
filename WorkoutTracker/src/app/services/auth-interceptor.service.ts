@@ -14,12 +14,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req);
+    const authHeader = 'Bearer ' + this.getToken();
+    const authReq = req.clone({headers: req.headers.set('Authorization', authHeader)})
+    return next.handle(authReq);
   }
 
   constructor(private dbService: DbService, private http: HttpClient) { }
 
-  private saveToken(token: string) {
+  private setToken(token: string) {
     window.localStorage['loc8r-token'] = token;
   }
 
@@ -35,7 +37,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     const url = `${this.dbService.baseUrl}/register`;
     // Shoud be type AuthResponse
     this.http.post<any>(url, user).subscribe(data => {
-      this.saveToken(data.token);
+      this.setToken(data.token);
       return true;
     },
   (err: HttpErrorResponse) => {
@@ -50,9 +52,31 @@ export class AuthInterceptorService implements HttpInterceptor {
   })
   }
 
+  public login(user: User) {
+    const url = `${this.dbService.baseUrl}/login`;
+    this.http.post<any>(url, user).subscribe(data => {
+      this.setToken(data.token);
+      return true;
+    },
+    (err: HttpErrorResponse) => {
+      if (err.error instanceof Error) {
+        // clientside network error
+        console.log("An error occured: ", err.error.message);
+      } else {
+        // backend unsuccessful response
+        console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+      }
+      return false;
+    })    
+  }
+
+  public logout() {
+    window.localStorage['loc8r-token'] = "null";
+  }
+
   public isLoggedIn() {
     const token = this.getToken();
-    if (token) {
+    if (token !== "null") {
       const payload = JSON.parse(window.atob(token.split('.')[1]));
       return payload.exp > Date.now() / 1000;
     } else {
@@ -72,6 +96,10 @@ export class AuthInterceptorService implements HttpInterceptor {
     } else {
       return;
     }
+  }
+
+  public addWorkoutById(data) {
+    const url = `${this.dbService.baseUrl}/workouts`
   }
 
 }

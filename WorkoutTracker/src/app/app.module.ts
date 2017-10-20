@@ -17,13 +17,18 @@ import { WorkoutLogListComponent } from './workout-log-list/workout-log-list.com
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { AuthInterceptorService } from 'app/services/auth-interceptor.service';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from 'app/services/auth-guard.service';
 
 const appRoutes: Routes = [
   {path: '', component: WorkoutListComponent},
-  {path: 'edit/:id', component: EditWorkoutComponent},
-  {path: 'edit', component: EditWorkoutComponent},
-  {path: 'log-workout', component: LogWorkoutComponent},
-  {path: 'workout-logs', component: WorkoutLogListComponent}
+  {path: 'edit/:id', component: EditWorkoutComponent, canActivate: [AuthGuardService]},
+  {path: 'edit', component: EditWorkoutComponent, canActivate: [AuthGuardService]},
+  {path: 'log-workout', component: LogWorkoutComponent, canActivate: [AuthGuardService]},
+  {path: 'workout-logs', component: WorkoutLogListComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent}
 ]
 
 @NgModule({
@@ -36,6 +41,8 @@ const appRoutes: Routes = [
     LogWorkoutComponent,
     NavbarComponent,
     WorkoutLogListComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -45,7 +52,8 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [DbService, HttpClient, AuthInterceptorService],
+  providers: [DbService, HttpClient, AuthInterceptorService,
+  AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

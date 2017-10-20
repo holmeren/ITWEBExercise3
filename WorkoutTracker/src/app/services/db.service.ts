@@ -9,20 +9,20 @@ import { WorkoutLog } from 'models/workoutLog';
 @Injectable()
 export class DbService {
 
-  public baseUrl = "https://polar-badlands-78608.herokuapp.com/api/"
+  public baseUrl = "https://polar-badlands-78608.herokuapp.com/api"
 
   constructor(private http: HttpClient) { }
 
   public getAllWorkouts(): Observable<any> {
-    return this.http.get(this.baseUrl + 'workouts')
+    return this.http.get(this.baseUrl + '/workouts')
   }
 
   public getWorkout(id: string): Observable<any> {
-    return this.http.get(this.baseUrl + 'workout/' + id)
+    return this.http.get(this.baseUrl + '/workout/' + id)
   }
 
   public getAllWorkoutLogs(): Observable<any> {
-    return this.http.get(this.baseUrl + 'workoutLogs')
+    return this.http.get(this.baseUrl + '/workoutLogs')
   }
 
   public getWorkoutLog(id: string): Observable<any> {
